@@ -20,7 +20,7 @@ const Footer: React.FC = () => {
           <div className="flex flex-col">
             <a href="#home" className="text-xl font-mono font-bold text-primary-500 flex items-center">
               <span className="text-white">&lt;</span>
-              Ayush
+              Shyam
               <span className="text-white">/&gt;</span>
             </a>
             <p className="mt-4 text-gray-400 text-sm max-w-xs">
@@ -64,7 +64,7 @@ const Footer: React.FC = () => {
         {/* Copyright */}
         <div className="mt-8 pt-8 border-t border-dark-300 flex flex-col md:flex-row justify-between items-center">
           <p className="text-gray-500 text-sm">
-            &copy; {currentYear} Ayush. All rights reserved.
+            &copy; {currentYear} Shyam. All rights reserved.
           </p>
           <p className="text-gray-500 text-sm mt-2 md:mt-0">
             Designed & Built with 🖤

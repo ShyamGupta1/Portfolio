@@ -52,7 +52,7 @@ const AboutSection: React.FC = () => {
               <div className="aspect-w-4 aspect-h-3 overflow-hidden rounded-lg">
                 <img
                   src="https://images.pexels.com/photos/4974920/pexels-photo-4974920.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-                  alt="Ayush coding"
+                  alt="Shyam coding"
                   className="w-full h-full object-cover"
                 />
               </div>
@@ -69,11 +69,11 @@ const AboutSection: React.FC = () => {
             <h3 className="text-2xl font-bold mb-4">
               Computer Science Engineer & Web Developer
             </h3>
-            
+
             <p className="text-gray-300 mb-6">
               I'm a passionate Computer Science Engineer specializing in web development and cyber security. With a keen interest in building secure, scalable applications, I blend technical expertise with creative problem-solving to deliver exceptional results.
             </p>
-            
+
             <p className="text-gray-300 mb-6">
               My journey in technology began with competitive programming, which honed my algorithmic thinking and efficiency. This foundation has proven invaluable in my professional work, allowing me to write optimized code and tackle complex challenges.
             </p>
