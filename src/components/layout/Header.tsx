@@ -12,7 +12,6 @@ const Header: React.FC<HeaderProps> = ({ theme, setTheme }) => {
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('home');
 
-  // Navigation items
   const navItems = [
     { name: 'Home', href: '#home' },
     { name: 'About', href: '#about' },
@@ -22,26 +21,16 @@ const Header: React.FC<HeaderProps> = ({ theme, setTheme }) => {
     { name: 'Contact', href: '#contact' },
   ];
 
-  // Handle scroll
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 20) {
-        setScrolled(true);
-      } else {
-        setScrolled(false);
-      }
-
-      // Update active section based on scroll position
+      setScrolled(window.scrollY > 20);
+      
       const sections = document.querySelectorAll('section[id]');
       let currentSection = 'home';
-
       sections.forEach((section) => {
         const sectionTop = section.getBoundingClientRect().top;
-        if (sectionTop <= 100) {
-          currentSection = section.getAttribute('id') || 'home';
-        }
+        if (sectionTop <= 100) currentSection = section.getAttribute('id') || 'home';
       });
-
       setActiveSection(currentSection);
     };
 
@@ -49,9 +38,7 @@ const Header: React.FC<HeaderProps> = ({ theme, setTheme }) => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const toggleTheme = () => {
-    setTheme(theme === 'dark' ? 'light' : 'dark');
-  };
+  const toggleTheme = () => setTheme(theme === 'dark' ? 'light' : 'dark');
 
   return (
     <motion.header
@@ -79,45 +66,23 @@ const Header: React.FC<HeaderProps> = ({ theme, setTheme }) => {
             <span className={theme === 'dark' ? 'text-white' : 'text-dark-900'}>/&gt;</span>
           </motion.a>
 
-          {/* Desktop Navigation + Theme Toggle */}
-          <div className="hidden md:flex items-center space-x-4">
-            <nav className="flex items-center space-x-8">
-              {navItems.map((item) => (
-                <a
-                  key={item.name}
-                  href={item.href}
-                  className={`text-sm font-medium transition-all duration-300 hover:text-primary-400 ${
-                    activeSection === item.href.substring(1)
-                      ? 'text-primary-500'
-                      : theme === 'dark'
-                      ? 'text-gray-300'
-                      : 'text-gray-600'
-                  }`}
-                >
-                  {item.name}
-                </a>
-              ))}
-              <a href="#contact" className="btn-primary">
-                Contact Me
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex items-center space-x-8">
+            {navItems.map((item) => (
+              <a
+                key={item.name}
+                href={item.href}
+                className={`text-sm font-medium transition-all duration-300 hover:text-primary-400 ${
+                  activeSection === item.href.substring(1) 
+                    ? 'text-primary-500' 
+                    : theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
+                }`}
+              >
+                {item.name}
               </a>
-            </nav>
-            {/* Theme Toggle Button (desktop) */}
-            <button
-              onClick={toggleTheme}
-              className={`p-2 rounded-full ${
-                theme === 'dark'
-                  ? 'bg-dark-300 hover:bg-dark-200'
-                  : 'bg-gray-100 hover:bg-gray-200'
-              } transition-colors`}
-              aria-label="Toggle theme"
-            >
-              {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
-            </button>
-          </div>
+            ))}
 
-          {/* Mobile Navigation & Theme Toggle */}
-          <div className="md:hidden flex items-center gap-4">
-            {/* Theme Toggle Button (mobile) */}
+            {/* Theme Toggle for Desktop */}
             <button
               onClick={toggleTheme}
               className={`p-2 rounded-full ${
@@ -129,7 +94,27 @@ const Header: React.FC<HeaderProps> = ({ theme, setTheme }) => {
             >
               {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
             </button>
-            {/* Menu Button */}
+
+            <a href="#contact" className="btn-primary">
+              Contact Me
+            </a>
+          </nav>
+
+          {/* Mobile Navigation Button */}
+          <div className="md:hidden flex items-center gap-4">
+            {/* Theme Toggle for Mobile */}
+            <button
+              onClick={toggleTheme}
+              className={`p-2 rounded-full ${
+                theme === 'dark'
+                  ? 'bg-dark-300 hover:bg-dark-200'
+                  : 'bg-gray-100 hover:bg-gray-200'
+              } transition-colors`}
+              aria-label="Toggle theme"
+            >
+              {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
+            </button>
+            
             <button
               onClick={() => setIsOpen(!isOpen)}
               className={`p-2 rounded-md ${
@@ -148,18 +133,17 @@ const Header: React.FC<HeaderProps> = ({ theme, setTheme }) => {
       {/* Mobile Menu Dropdown */}
       {isOpen && (
         <motion.div
-          className={`md:hidden fixed top-0 right-0 w-full h-full z-40 ${
-            theme === 'dark'
-              ? 'bg-dark-900/95 backdrop-blur-md'
-              : 'bg-white/95 backdrop-blur-md'
-          } flex flex-col`}
-          initial={{ opacity: 0, x: 100 }}
-          animate={{ opacity: 1, x: 0 }}
-          exit={{ opacity: 0, x: 100 }}
+          className={
+            theme === 'dark' 
+              ? 'md:hidden bg-dark-900/95 backdrop-blur-md' 
+              : 'md:hidden bg-white/95 backdrop-blur-md'
+          }
+          initial={{ opacity: 0, height: 0 }}
+          animate={{ opacity: 1, height: 'auto' }}
           transition={{ duration: 0.3 }}
         >
-          <div className="flex-1 flex flex-col justify-center items-center py-8">
-            <nav className="flex flex-col space-y-4 w-full items-center">
+          <div className="container-section py-4">
+            <nav className="flex flex-col space-y-4">
               {navItems.map((item) => (
                 <a
                   key={item.name}
@@ -167,9 +151,7 @@ const Header: React.FC<HeaderProps> = ({ theme, setTheme }) => {
                   className={`text-base font-medium py-2 transition-all duration-300 hover:text-primary-400 ${
                     activeSection === item.href.substring(1)
                       ? 'text-primary-500'
-                      : theme === 'dark'
-                      ? 'text-gray-300'
-                      : 'text-gray-600'
+                      : theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
                   }`}
                   onClick={() => setIsOpen(false)}
                 >
