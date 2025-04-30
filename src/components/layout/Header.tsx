@@ -55,13 +55,12 @@ const Header: React.FC<HeaderProps> = ({ theme, setTheme }) => {
 
   return (
     <motion.header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? theme === 'dark'
-            ? 'bg-dark-900/90 backdrop-blur-sm shadow-md'
-            : 'bg-white/90 backdrop-blur-sm shadow-md'
-          : 'bg-transparent'
-      }`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled
+        ? theme === 'dark'
+          ? 'bg-dark-900/90 backdrop-blur-sm shadow-md'
+          : 'bg-white/90 backdrop-blur-sm shadow-md'
+        : 'bg-transparent'
+        }`}
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ duration: 0.5 }}
@@ -79,64 +78,45 @@ const Header: React.FC<HeaderProps> = ({ theme, setTheme }) => {
             <span className={theme === 'dark' ? 'text-white' : 'text-dark-900'}>/&gt;</span>
           </motion.a>
 
-          {/* Desktop Navigation + Theme Toggle */}
-          <div className="hidden md:flex items-center space-x-4">
-            <nav className="flex items-center space-x-8">
-              {navItems.map((item) => (
-                <a
-                  key={item.name}
-                  href={item.href}
-                  className={`text-sm font-medium transition-all duration-300 hover:text-primary-400 ${
-                    activeSection === item.href.substring(1)
-                      ? 'text-primary-500'
-                      : theme === 'dark'
-                      ? 'text-gray-300'
-                      : 'text-gray-600'
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex items-center space-x-8">
+            {navItems.map((item) => (
+              <a
+                key={item.name}
+                href={item.href}
+                className={`text-sm font-medium transition-all duration-300 hover:text-primary-400 ${activeSection === item.href.substring(1) ? 'text-primary-500' : theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
                   }`}
-                >
-                  {item.name}
-                </a>
-              ))}
-              <a href="#contact" className="btn-primary">
-                Contact Me
+              >
+                {item.name}
               </a>
-            </nav>
-            {/* Theme Toggle Button (desktop) */}
-            <button
-              onClick={toggleTheme}
-              className={`p-2 rounded-full ${
-                theme === 'dark'
-                  ? 'bg-dark-300 hover:bg-dark-200'
-                  : 'bg-gray-100 hover:bg-gray-200'
-              } transition-colors`}
-              aria-label="Toggle theme"
-            >
-              {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
-            </button>
-          </div>
+            ))}
 
-          {/* Mobile Navigation & Theme Toggle */}
+            <a
+              href="#contact"
+              className="btn-primary"
+            >
+              Contact Me
+            </a>
+          </nav>
+
+          {/* Mobile Navigation Button */}
           <div className="md:hidden flex items-center gap-4">
-            {/* Theme Toggle Button (mobile) */}
             <button
               onClick={toggleTheme}
-              className={`p-2 rounded-full ${
-                theme === 'dark'
-                  ? 'bg-dark-300 hover:bg-dark-200'
-                  : 'bg-gray-100 hover:bg-gray-200'
-              } transition-colors`}
+              className={`p-2 rounded-full ${theme === 'dark'
+                ? 'bg-dark-300 hover:bg-dark-200'
+                : 'bg-gray-100 hover:bg-gray-200'
+                } transition-colors`}
               aria-label="Toggle theme"
             >
               {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
             </button>
-            {/* Menu Button */}
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className={`p-2 rounded-md ${
-                theme === 'dark'
-                  ? 'bg-dark-300 hover:bg-dark-200'
-                  : 'bg-gray-100 hover:bg-gray-200'
-              } transition-colors`}
+              className={`p-2 rounded-md ${theme === 'dark'
+                ? 'bg-dark-300 hover:bg-dark-200'
+                : 'bg-gray-100 hover:bg-gray-200'
+                } transition-colors`}
               aria-label="Toggle menu"
             >
               {isOpen ? <X size={24} /> : <Menu size={24} />}
@@ -148,14 +128,9 @@ const Header: React.FC<HeaderProps> = ({ theme, setTheme }) => {
       {/* Mobile Menu Dropdown */}
       {isOpen && (
         <motion.div
-          className={`md:hidden fixed top-0 right-0 w-3/4 max-w-xs h-full z-40 ${
-            theme === 'dark'
-              ? 'bg-dark-900/95 backdrop-blur-md'
-              : 'bg-white/95 backdrop-blur-md'
-          }`}
-          initial={{ opacity: 0, x: 100 }}
-          animate={{ opacity: 1, x: 0 }}
-          exit={{ opacity: 0, x: 100 }}
+          className={theme === 'dark' ? 'md:hidden bg-dark-900/95 backdrop-blur-md' : 'md:hidden bg-white/95 backdrop-blur-md'}
+          initial={{ opacity: 0, height: 0 }}
+          animate={{ opacity: 1, height: 'auto' }}
           transition={{ duration: 0.3 }}
         >
           <div className="container-section py-4">
@@ -164,13 +139,10 @@ const Header: React.FC<HeaderProps> = ({ theme, setTheme }) => {
                 <a
                   key={item.name}
                   href={item.href}
-                  className={`text-base font-medium py-2 transition-all duration-300 hover:text-primary-400 ${
-                    activeSection === item.href.substring(1)
-                      ? 'text-primary-500'
-                      : theme === 'dark'
-                      ? 'text-gray-300'
-                      : 'text-gray-600'
-                  }`}
+                  className={`text-base font-medium py-2 transition-all duration-300 hover:text-primary-400 ${activeSection === item.href.substring(1)
+                    ? 'text-primary-500'
+                    : theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
+                    }`}
                   onClick={() => setIsOpen(false)}
                 >
                   {item.name}
