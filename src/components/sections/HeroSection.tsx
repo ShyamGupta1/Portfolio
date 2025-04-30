@@ -91,7 +91,7 @@ const HeroSection: React.FC = () => {
 
               <div className="flex gap-3 mt-2">
                 <motion.a
-                  href="https://github.com/username"
+                  href="https://github.com/ShyamGupta1"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="p-2 rounded-full bg-dark-300 text-gray-400 hover:text-white hover:bg-primary-500 transition-colors"
@@ -103,7 +103,7 @@ const HeroSection: React.FC = () => {
                 </motion.a>
 
                 <motion.a
-                  href="https://linkedin.com/in/ayush2412"
+                  href="https://linkedin.com/in/shyamgupta-"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="p-2 rounded-full bg-dark-300 text-gray-400 hover:text-white hover:bg-primary-500 transition-colors"
