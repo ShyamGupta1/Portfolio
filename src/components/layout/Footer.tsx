@@ -6,10 +6,10 @@ const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
 
   const socialLinks = [
-    { icon: <Github size={20} />, href: 'https://github.com/username', label: 'GitHub' },
-    { icon: <Linkedin size={20} />, href: 'https://linkedin.com/in/username', label: 'LinkedIn' },
+    { icon: <Github size={20} />, href: 'https://github.com/ShyamGupta1', label: 'GitHub' },
+    { icon: <Linkedin size={20} />, href: 'https://linkedin.com/in/shyamgupta-', label: 'LinkedIn' },
     { icon: <Twitter size={20} />, href: 'https://twitter.com/username', label: 'Twitter' },
-    { icon: <Mail size={20} />, href: 'mailto:contact@example.com', label: 'Email' },
+    { icon: <Mail size={20} />, href: 'mailto:shyamgupta4004@gmail.com', label: 'Email' },
   ];
 
   return (
