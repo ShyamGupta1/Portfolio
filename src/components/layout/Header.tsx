@@ -101,7 +101,7 @@ const Header: React.FC<HeaderProps> = ({ theme, setTheme }) => {
           </nav>
 
           {/* Mobile Navigation Button */}
-          <div className="md:hidden flex items-center gap-4">
+          <div className="md:hidden flex items-center gap-4 pr-2">
             {/* Theme Toggle for Mobile */}
             <button
               onClick={toggleTheme}
@@ -115,12 +115,13 @@ const Header: React.FC<HeaderProps> = ({ theme, setTheme }) => {
               {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
             </button>
             
+            {/* Menu Button with improved spacing */}
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className={`p-2 rounded-md ${
+              className={`p-3 rounded-md ${
                 theme === 'dark'
-                  ? 'bg-dark-300 hover:bg-dark-200'
-                  : 'bg-gray-100 hover:bg-gray-200'
+                  ? 'bg-dark-300 hover:bg-dark-200 text-gray-100'
+                  : 'bg-gray-100 hover:bg-gray-200 text-dark-900'
               } transition-colors`}
               aria-label="Toggle menu"
             >
@@ -130,19 +131,19 @@ const Header: React.FC<HeaderProps> = ({ theme, setTheme }) => {
         </div>
       </div>
 
-      {/* Mobile Menu Dropdown */}
+      {/* Mobile Menu Dropdown - Full width and proper spacing */}
       {isOpen && (
         <motion.div
           className={
             theme === 'dark' 
-              ? 'md:hidden bg-dark-900/95 backdrop-blur-md' 
-              : 'md:hidden bg-white/95 backdrop-blur-md'
+              ? 'md:hidden bg-dark-900/95 backdrop-blur-md w-full'
+              : 'md:hidden bg-white/95 backdrop-blur-md w-full'
           }
           initial={{ opacity: 0, height: 0 }}
           animate={{ opacity: 1, height: 'auto' }}
           transition={{ duration: 0.3 }}
         >
-          <div className="container-section py-4">
+          <div className="container-section py-4 px-4"> {/* Added px-4 for horizontal padding */}
             <nav className="flex flex-col space-y-4">
               {navItems.map((item) => (
                 <a
