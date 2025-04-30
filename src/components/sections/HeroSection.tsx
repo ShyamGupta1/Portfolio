@@ -42,9 +42,9 @@ const HeroSection: React.FC = () => {
           >
             <h1 className="text-5xl md:text-6xl font-bold tracking-tight mb-4">
               <span className="block">Hi, I'm </span>
-              <span className="gradient-text">Ayush</span>
+              <span className="gradient-text">Shyam</span>
             </h1>
-            
+
             <div className="text-xl md:text-2xl text-gray-300 font-medium h-16 mb-6">
               <TypeAnimation
                 sequence={[
@@ -54,17 +54,19 @@ const HeroSection: React.FC = () => {
                   1000,
                   'Cloud Engineer',
                   1000,
+                  'UI/UX Designer',
+                  1000,
                 ]}
                 wrapper="div"
                 speed={50}
                 repeat={Infinity}
               />
             </div>
-            
+
             <p className="text-gray-400 text-lg max-w-lg mb-8">
               Passionate about creating secure, performant web experiences and solving complex problems through elegant code solutions.
             </p>
-            
+
             <div className="flex flex-wrap gap-4">
               <motion.a
                 href="#projects"
@@ -75,7 +77,7 @@ const HeroSection: React.FC = () => {
                 View My Work
                 <ArrowRight size={18} />
               </motion.a>
-              
+
               <motion.a
                 href="/resume.pdf"
                 className="btn-outline"
@@ -86,7 +88,7 @@ const HeroSection: React.FC = () => {
                 Download CV
                 <Download size={18} />
               </motion.a>
-              
+
               <div className="flex gap-3 mt-2">
                 <motion.a
                   href="https://github.com/username"
@@ -99,7 +101,7 @@ const HeroSection: React.FC = () => {
                 >
                   <Github size={20} />
                 </motion.a>
-                
+
                 <motion.a
                   href="https://linkedin.com/in/ayush2412"
                   target="_blank"
@@ -114,7 +116,7 @@ const HeroSection: React.FC = () => {
               </div>
             </div>
           </motion.div>
-          
+
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -130,14 +132,14 @@ const HeroSection: React.FC = () => {
                   className="w-full h-full object-cover"
                 />
               </div>
-              
+
               {/* Decorative elements */}
               <div className="absolute -top-3 -right-3 w-16 h-16 rounded-full bg-secondary-500/30 backdrop-blur-sm"></div>
               <div className="absolute -bottom-5 -left-5 w-20 h-20 rounded-full bg-accent-500/20 backdrop-blur-sm"></div>
             </div>
           </motion.div>
         </div>
-        
+
         {/* Scroll down indicator */}
         <motion.div
           className="absolute bottom-10 left-1/2 transform -translate-x-1/2 flex flex-col items-center"
