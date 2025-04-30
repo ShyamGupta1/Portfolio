@@ -99,18 +99,20 @@ const Header: React.FC<HeaderProps> = ({ theme, setTheme }) => {
             </a>
           </nav>
 
-          {/* Mobile Navigation Button */}
+          {/* Theme Toggle Button (always visible) */}
+          <button
+            onClick={toggleTheme}
+            className={`p-2 rounded-full ${theme === 'dark'
+              ? 'bg-dark-300 hover:bg-dark-200'
+              : 'bg-gray-100 hover:bg-gray-200'
+              } transition-colors ml-4`}
+            aria-label="Toggle theme"
+          >
+            {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
+          </button>
+
+          {/* Mobile Navigation Button (menu only) */}
           <div className="md:hidden flex items-center gap-4">
-            <button
-              onClick={toggleTheme}
-              className={`p-2 rounded-full ${theme === 'dark'
-                ? 'bg-dark-300 hover:bg-dark-200'
-                : 'bg-gray-100 hover:bg-gray-200'
-                } transition-colors`}
-              aria-label="Toggle theme"
-            >
-              {theme === 'dark' ? <Sun size={18} /> : <Moon size={18} />}
-            </button>
             <button
               onClick={() => setIsOpen(!isOpen)}
               className={`p-2 rounded-md ${theme === 'dark'
