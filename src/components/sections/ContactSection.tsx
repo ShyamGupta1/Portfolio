@@ -2,8 +2,17 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Send, Mail, Phone, MapPin, Linkedin, Github, Twitter } from 'lucide-react';
 
-const BOT_TOKEN = '8114272776:AAHHAjTqDT3IgiZtOlIaykomwZaD1FIG5Dc'; 
-const CHAT_ID = '785027247';    
+// Replace these with your actual Telegram bot token and chat ID:
+const BOT_TOKEN = 'YOUR_BOT_TOKEN';
+const CHAT_ID = 'YOUR_CHAT_ID';
+
+// Escape HTML to avoid Telegram parse errors
+const escapeHtml = (unsafe: string) =>
+  unsafe
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
 
 const ContactSection: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -25,11 +34,12 @@ const ContactSection: React.FC = () => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    const text = `New Contact Form Submission:
-Name: ${formData.name}
-Email: ${formData.email}
-Subject: ${formData.subject}
-Message: ${formData.message}`;
+    // Construct message in HTML (safer than Markdown)
+    const text = `<b>New Contact Form Submission</b>\n
+<b>Name:</b> ${escapeHtml(formData.name)}\n
+<b>Email:</b> ${escapeHtml(formData.email)}\n
+<b>Subject:</b> ${escapeHtml(formData.subject)}\n
+<b>Message:</b> ${escapeHtml(formData.message)}`;
 
     const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
 
@@ -40,17 +50,22 @@ Message: ${formData.message}`;
         body: JSON.stringify({
           chat_id: CHAT_ID,
           text: text,
+          parse_mode: 'HTML',
         }),
       });
 
-      if (response.ok) {
+      const data = await response.json();
+
+      if (response.ok && data.ok) {
         setSubmitStatus('success');
         setFormData({ name: '', email: '', subject: '', message: '' });
       } else {
         setSubmitStatus('error');
+        alert('Telegram error: ' + (data.description || 'Unknown error'));
       }
     } catch (error) {
       setSubmitStatus('error');
+      alert('Network or unexpected error: ' + (error as any).message);
     } finally {
       setIsSubmitting(false);
       setTimeout(() => setSubmitStatus(null), 5000);
