@@ -1,4 +1,4 @@
-import React from 'react';
+/import React from 'react';
 import { motion } from 'framer-motion';
 import { Calendar, MapPin } from 'lucide-react';
 import { ExperienceType } from '../../types';
