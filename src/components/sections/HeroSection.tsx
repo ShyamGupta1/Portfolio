@@ -79,7 +79,7 @@ const HeroSection: React.FC = () => {
               </motion.a>
 
               <motion.a
-                href="/resume.pdf"
+                href="https://drive.google.com/uc?export=download&id=1UAtJ8NmneJz-g7JhUsd5rCugIrrNVE4H"
                 className="btn-outline"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
