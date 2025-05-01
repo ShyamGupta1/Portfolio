@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Send, Mail, Phone, MapPin, Linkedin, Github, Twitter } from 'lucide-react';
 
+const BOT_TOKEN = '8114272776:AAHHAjTqDT3IgiZtOlIaykomwZaD1FIG5Dc'; 
+const CHAT_ID = '785027247';    
+
 const ContactSection: React.FC = () => {
   const [formData, setFormData] = useState({
     name: '',
@@ -9,7 +12,7 @@ const ContactSection: React.FC = () => {
     subject: '',
     message: '',
   });
-  
+
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<null | 'success' | 'error'>(null);
 
@@ -21,32 +24,49 @@ const ContactSection: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
-    // Simulate form submission
+
+    const text = `New Contact Form Submission:
+Name: ${formData.name}
+Email: ${formData.email}
+Subject: ${formData.subject}
+Message: ${formData.message}`;
+
+    const url = `https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`;
+
     try {
-      // In a real application, you would send the form data to a server
-      await new Promise(resolve => setTimeout(resolve, 1500));
-      setSubmitStatus('success');
-      setFormData({ name: '', email: '', subject: '', message: '' });
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          chat_id: CHAT_ID,
+          text: text,
+        }),
+      });
+
+      if (response.ok) {
+        setSubmitStatus('success');
+        setFormData({ name: '', email: '', subject: '', message: '' });
+      } else {
+        setSubmitStatus('error');
+      }
     } catch (error) {
       setSubmitStatus('error');
     } finally {
       setIsSubmitting(false);
-      // Reset status after 5 seconds
       setTimeout(() => setSubmitStatus(null), 5000);
     }
   };
 
   const contactInfo = [
-    { icon: <Mail size={20} />, text: 'ayushdec24@gmail.com' },
-    { icon: <Phone size={20} />, text: '+91 8595934474' },
-    { icon: <MapPin size={20} />, text: 'New Delhi, India' },
+    { icon: <Mail size={20} />, text: 'shyamgupta4004@gmail.com' },
+    { icon: <Phone size={20} />, text: '+91 96xxxxxx' },
+    { icon: <MapPin size={20} />, text: 'Uttar Pradesh, India' },
   ];
 
   const socialLinks = [
-    { icon: <Github size={20} />, href: 'https://github.com/username', label: 'GitHub' },
-    { icon: <Linkedin size={20} />, href: 'https://linkedin.com/in/username', label: 'LinkedIn' },
-    { icon: <Twitter size={20} />, href: 'https://twitter.com/username', label: 'Twitter' },
+    { icon: <Github size={20} />, href: 'https://github.com/ShyamGupta1', label: 'GitHub' },
+    { icon: <Linkedin size={20} />, href: 'https://linkedin.com/in/shyamgupta-', label: 'LinkedIn' },
+    { icon: <Twitter size={20} />, href: 'https://twitter.com/shyamgupta_8', label: 'Twitter' },
   ];
 
   return (
@@ -75,7 +95,7 @@ const ContactSection: React.FC = () => {
           >
             <div className="glass p-6 md:p-8">
               <h3 className="text-xl font-bold mb-6">Send a Message</h3>
-              
+
               <form onSubmit={handleSubmit} className="space-y-4">
                 {/* Name field */}
                 <div>
@@ -92,7 +112,7 @@ const ContactSection: React.FC = () => {
                     className="w-full px-4 py-2 bg-dark-300 border border-dark-100 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
                   />
                 </div>
-                
+
                 {/* Email field */}
                 <div>
                   <label htmlFor="email" className="block text-sm font-medium text-gray-300 mb-1">
@@ -108,7 +128,7 @@ const ContactSection: React.FC = () => {
                     className="w-full px-4 py-2 bg-dark-300 border border-dark-100 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
                   />
                 </div>
-                
+
                 {/* Subject field */}
                 <div>
                   <label htmlFor="subject" className="block text-sm font-medium text-gray-300 mb-1">
@@ -124,7 +144,7 @@ const ContactSection: React.FC = () => {
                     className="w-full px-4 py-2 bg-dark-300 border border-dark-100 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
                   />
                 </div>
-                
+
                 {/* Message field */}
                 <div>
                   <label htmlFor="message" className="block text-sm font-medium text-gray-300 mb-1">
@@ -140,7 +160,7 @@ const ContactSection: React.FC = () => {
                     className="w-full px-4 py-2 bg-dark-300 border border-dark-100 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
                   />
                 </div>
-                
+
                 {/* Submit button */}
                 <button
                   type="submit"
@@ -157,12 +177,12 @@ const ContactSection: React.FC = () => {
                     </span>
                   ) : (
                     <span className="flex items-center justify-center">
-                      Send Message 
+                      Send Message
                       <Send size={16} className="ml-2" />
                     </span>
                   )}
                 </button>
-                
+
                 {/* Submission status message */}
                 {submitStatus === 'success' && (
                   <div className="p-3 bg-success-500/20 border border-success-500 rounded-md text-sm">
@@ -189,7 +209,7 @@ const ContactSection: React.FC = () => {
               {/* Contact details */}
               <div className="glass p-6 md:p-8 mb-6">
                 <h3 className="text-xl font-bold mb-6">Contact Information</h3>
-                
+
                 <div className="space-y-4">
                   {contactInfo.map((info, index) => (
                     <div key={index} className="flex items-center">
@@ -200,7 +220,7 @@ const ContactSection: React.FC = () => {
                     </div>
                   ))}
                 </div>
-                
+
                 <div className="mt-8">
                   <h4 className="text-lg font-medium mb-4">Connect with me</h4>
                   <div className="flex space-x-3">
@@ -221,14 +241,14 @@ const ContactSection: React.FC = () => {
                   </div>
                 </div>
               </div>
-              
+
               {/* Availability card */}
               <div className="glass p-6 md:p-8 flex-grow">
                 <h3 className="text-xl font-bold mb-4">Availability</h3>
                 <p className="text-gray-300 mb-6">
                   Currently available for freelance work and collaborations. I'm particularly interested in challenging projects related to:
                 </p>
-                
+
                 <ul className="space-y-2">
                   <li className="flex items-center">
                     <span className="text-primary-500 mr-2">•</span>
@@ -243,7 +263,7 @@ const ContactSection: React.FC = () => {
                     <span>Open source contributions</span>
                   </li>
                 </ul>
-                
+
                 <div className="mt-6 pt-6 border-t border-dark-300">
                   <p className="text-gray-400 text-sm">
                     Expected response time: <span className="text-white">1-2 business days</span>
