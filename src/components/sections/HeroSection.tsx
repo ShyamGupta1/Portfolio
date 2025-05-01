@@ -127,7 +127,7 @@ const HeroSection: React.FC = () => {
               {/* Profile image with glow effect */}
               <div className="w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-primary-500 shadow-neon relative">
                 <img
-                  src="Shyam.jpg"
+                  src="https://media.licdn.com/dms/image/v2/D5603AQF9eBfOVfDkFw/profile-displayphoto-shrink_800_800/B56ZZ5TYmRHUAc-/0/1745791847948?e=1751500800&v=beta&t=0mjRoZRFi-GGIc1TSgY7m6TmgrehpLpN8lkFa4o2ZzY"
                   alt="Shyam"
                   className="w-full h-full object-cover"
                 />
