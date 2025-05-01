@@ -3,8 +3,8 @@ import { motion } from 'framer-motion';
 import { Send, Mail, Phone, MapPin, Linkedin, Github, Twitter } from 'lucide-react';
 
 // Replace these with your actual Telegram bot token and chat ID:
-const BOT_TOKEN = 'YOUR_BOT_TOKEN';
-const CHAT_ID = 'YOUR_CHAT_ID';
+const BOT_TOKEN = '8114272776:AAHHAjTqDT3IgiZtOlIaykomwZaD1FIG5Dc';
+const CHAT_ID = '785027247';
 
 // Escape HTML to avoid Telegram parse errors
 const escapeHtml = (unsafe: string) =>
